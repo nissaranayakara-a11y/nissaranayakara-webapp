@@ -1,9 +1,12 @@
 /* Service worker: cache-first so the app works offline once visited. */
-const CACHE = 'nk-v10';
+const CACHE = 'nk-v11';
 // critical assets — offline fails without these
 const CORE = ['./', './index.html', './data.js', './sinhala-ime.js', './manifest.webmanifest'];
 // nice-to-have — cached individually, failures ignored
-const EXTRA = ['./icon-192.png', './icon-512.png'];
+const EXTRA = ['./icon-192.png', './icon-512.png', './guide.html',
+  './guide-img/home.png', './guide-img/playlist.png', './guide-img/search.png',
+  './guide-img/keyboard.png', './guide-img/suttas.png', './guide-img/playlists.png',
+  './guide-img/mine.png', './guide-img/dark.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

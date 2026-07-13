@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>භාවිත මාර්ගෝපදේශය — නිස්සරණය කරා දේශනා සෙවුම</title>
+<style>
+  :root { --navy:#1F3864; --blue:#2E5597; --light:#EEF2F8; --border:#D9E1EC; --muted:#777; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Nirmala UI","Noto Sans Sinhala","Iskoola Pota",sans-serif;
+         color:#222; background:#fafbfd; line-height:1.7; }
+  header { background:var(--navy); color:#fff; padding:26px 20px; text-align:center; }
+  header h1 { margin:0 0 6px; font-size:1.5rem; }
+  header .sub { opacity:.8; font-size:.9rem; }
+  header a { color:#cfe0ff; }
+  main { max-width:820px; margin:0 auto; padding:20px; }
+  h2 { color:var(--navy); border-bottom:3px solid var(--light); padding-bottom:6px; margin-top:44px; font-size:1.3rem; }
+  h3 { color:var(--blue); margin-top:26px; font-size:1.05rem; }
+  .toc { background:#fff; border:1px solid var(--border); border-radius:12px; padding:14px 22px; margin-top:20px; }
+  .toc a { color:var(--blue); text-decoration:none; display:block; padding:3px 0; }
+  .toc a:hover { text-decoration:underline; }
+  .shot { display:block; width:100%; max-width:380px; border:1px solid var(--border);
+          border-radius:14px; box-shadow:0 4px 14px rgba(31,56,100,.15); margin:14px auto; }
+  .cap { text-align:center; color:var(--muted); font-size:.82rem; margin:-6px 0 18px; }
+  .tip { background:#eef7ee; border-right:4px solid #3c9a3c; border-radius:8px; padding:10px 14px; margin:12px 0; font-size:.95rem; }
+  .note { background:#fff7e6; border-right:4px solid #d99a17; border-radius:8px; padding:10px 14px; margin:12px 0; font-size:.95rem; }
+  .btn-demo { display:inline-block; background:var(--light); border:1px solid var(--border);
+              border-radius:8px; padding:1px 10px; font-size:.9rem; color:var(--navy); white-space:nowrap; }
+  table { border-collapse:collapse; width:100%; margin:10px 0; font-size:.95rem; }
+  td, th { border:1px solid var(--border); padding:6px 12px; text-align:left; }
+  th { background:var(--light); color:var(--navy); }
+  code { background:var(--light); border-radius:5px; padding:1px 7px; font-family:inherit; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:30px 10px; }
+  .top { text-align:left; margin-top:20px; }
+  .top a { color:var(--blue); font-size:.85rem; text-decoration:none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>නිස්සරණය කරා — දේශනා සෙවුම යෙදුම</h1>
+  <div class="sub">භාවිත මාර්ගෝපදේශය (User Guide)</div>
+  <div class="sub" style="margin-top:8px"><a href="https://nissaranayakara-a11y.github.io/nissaranayakara-webapp/" target="_blank" rel="noopener">යෙදුම විවෘත කරන්න ↗</a></div>
+</header>
+<main>
+
+<div class="toc">
+  <strong>පටුන</strong>
+  <a href="#intro">1. හැඳින්වීම</a>
+  <a href="#install">2. දුරකථනයට ස්ථාපනය කිරීම (install)</a>
+  <a href="#common">3. පොදු අංග — video card එකක බොත්තම්</a>
+  <a href="#tab1">4. සදහම් දේශනා සහ පැන විසඳුම් (මුල් පිටුව)</a>
+  <a href="#tab2">5. දේශනා නම් සහ අන්තර්ගතය සෙවීම</a>
+  <a href="#tab3">6. සූත්‍ර නාමාවලිය</a>
+  <a href="#tab4">7. සියළු YouTube ධාවන ලැයිස්තු</a>
+  <a href="#tab5">8. ⭐ මගේ ලැයිස්තුව</a>
+  <a href="#dark">9. අඳුරු තේමාව (dark mode)</a>
+  <a href="#faq">10. නිතර අසන පැන</a>
+</div>
+
+<h2 id="intro">1. හැඳින්වීම</h2>
+<p>මෙම යෙදුම <strong>නිස්සරණය කරා I Nissaranaya Kara</strong> YouTube නාලිකාවේ සියලුම ධර්ම දේශනා
+පහසුවෙන් සොයා ගැනීමට, ඇසීමට සහ පිළිවෙළකට බලා ගැනීමට සකසන ලද්දකි. නාලිකාවේ
+📁 ධාවන ලැයිස්තු (playlists) 91ක්, 🎥 වීඩියෝ 1,346ක් සහ 📜 සූත්‍ර නාමාවලියක් මෙහි ඇතුළත් ය.</p>
+<p>යෙදුම ක්‍රියා කරන්නේ වෙබ් බ්‍රව්සරයක් තුළ ය — කිසිවක් මිලදී ගැනීමට හෝ ලියාපදිංචි වීමට අවශ්‍ය නැත.
+පහළින් ඇති ටැබ් පහ (📱 දුරකථනයේ නම් තිරයේ පහළම පේළිය) මගින් ප්‍රධාන කොටස් අතර මාරු විය හැක.</p>
+
+<h2 id="install">2. දුරකථනයට ස්ථාපනය කිරීම (install)</h2>
+<h3>Android (Chrome)</h3>
+<p>1. Chrome බ්‍රව්සරයෙන් යෙදුමේ ලිපිනය විවෘත කරන්න. &nbsp;
+2. ⋮ මෙනුවෙන් <strong>"Add to Home screen"</strong> හෝ <strong>"Install app"</strong> තෝරන්න. &nbsp;
+3. එවිට යෙදුම සාමාන්‍ය app එකක් මෙන් home screen එකට එක් වේ.</p>
+<h3>iPhone (Safari)</h3>
+<p>Safari වෙතින් විවෘත කර, Share බොත්තම ඔබා <strong>"Add to Home Screen"</strong> තෝරන්න.</p>
+<div class="tip">✔ ස්ථාපනය කළ පසු — පළමු වරට අන්තර්ජාලය සමඟ විවෘත කළොත් — ඉන්පසු
+<strong>අන්තර්ජාලය නොමැතිව ද</strong> දේශනා ලැයිස්තු බැලීම හා සෙවීම ක්‍රියා කරයි.
+(වීඩියෝ ඇසීමට පමණක් අන්තර්ජාලය අවශ්‍ය ය.)</div>
+
+<h2 id="common">3. පොදු අංග — සෑම වීඩියෝ එකකම ඇති බොත්තම්</h2>
+<p>ඕනෑම තැනක වීඩියෝවක් දිස්වන විට ඒ යටින් මෙම බොත්තම් හතර ඇත
+(දුරකථනයේ දී අයිකන පමණක් පෙනේ):</p>
+<table>
+<tr><th>බොත්තම</th><th>ක්‍රියාව</th></tr>
+<tr><td><span class="btn-demo">▶</span> play</td><td>වීඩියෝව YouTube වෙත නොගොස් <strong>එතැනම</strong> වාදනය කරයි. නැවත එබූ විට වසයි.</td></tr>
+<tr><td><span class="btn-demo">⭐</span> එකතු කරන්න</td><td>වීඩියෝව <strong>මගේ ලැයිස්තුවට</strong> (favourites) එක් කරයි / ඉවත් කරයි.</td></tr>
+<tr><td><span class="btn-demo">✓</span> අසා ඇත</td><td>අසා අවසන් දේශනා ලකුණු කරයි. ලකුණු කළ දේශනා වල මාතෘකාව ලා පැහැයෙන් පෙනේ. ▶ මගින් වාදනය කළ විට ස්වයංක්‍රීයව ලකුණු වේ.</td></tr>
+<tr><td><span class="btn-demo">🔗</span> share</td><td>වීඩියෝ ලින්ක් එක WhatsApp ආදියෙන් බෙදාගැනීමට (දුරකථනයේ) හෝ copy කිරීමට (පරිගණකයේ).</td></tr>
+</table>
+<p>ඊට අමතරව: <span class="btn-demo">විස්තරය බලන්න (show description)</span> ලින්ක් එක එබූ විට
+වීඩියෝවේ සම්පූර්ණ විස්තරය — සූත්‍ර යොමු, pitaka.lk ලින්ක්, දිනය, ස්ථානය ආදිය — දිග හැරේ.
+වීඩියෝ මාතෘකාව එබුවහොත් YouTube හි විවෘත වේ.</p>
+
+<h2 id="tab1">4. 🏠 සදහම් දේශනා සහ පැන විසඳුම් (මුල් පිටුව)</h2>
+<img class="shot" src="guide-img/home.png" alt="මුල් පිටුව">
+<div class="cap">මුල් පිටුව — වැදගත්ම දේශනා මාලා මුලින්ම</div>
+<p>යෙදුම විවෘත වන විට පෙනෙන ප්‍රධාන පිටුව මෙයයි. ධර්ම දේශනා හා පැන විසඳුම් අඩංගු
+ලැයිස්තු 85ක්, වැදගත්ම දේශනා මාලා (චතුරාර්‍ය සත්‍යය, සුත්‍ර විග්‍රහය, දහම් කරුණු, පැන විසඳුම් ආදිය)
+මුලින්ම එන පිළිවෙළට සකසා ඇත.</p>
+<p><strong>🕘 මෑතකදී බැලූ</strong> — ඉහළින්ම ඇති මෙම තීරුව එබූ විට, ඔබ අවසන් වරට බැලූ
+ලැයිස්තු හා වීඩියෝ (උපරිම 12ක්) දිග හැරේ. <span class="btn-demo">✕ clear</span> මගින් හිස් කළ හැක.</p>
+<p><strong>සෙවුම් කොටුව</strong> — ලැයිස්තු නම අනුව ක්ෂණිකව පෙරයි (filter). Singlish බොත්තම හා
+යතුරු පුවරුව මෙහිදී ද භාවිත කළ හැක (5 වන කොටස බලන්න).</p>
+<p>ලැයිස්තුවක් එබූ විට එහි සියලු වීඩියෝ දිස්වේ:</p>
+<img class="shot" src="guide-img/playlist.png" alt="ලැයිස්තුවක් තුළ">
+<div class="cap">ලැයිස්තුවක් තුළ — වීඩියෝ, විස්තර සහ බොත්තම්</div>
+<p>මෙහි <span class="btn-demo">← ආපසු (back)</span> මගින් පෙර පිටුවට යා හැක.
+<strong>"මෙම ලැයිස්තුව තුළ සොයන්න"</strong> කොටුව මගින් විශාල ලැයිස්තුවක (උදා: වැදගත් දහම් කරුණු — වීඩියෝ 580)
+අවශ්‍ය දේශනාව ඉක්මනින් සොයා ගත හැක. <span class="btn-demo">🔗 share</span> මගින් සම්පූර්ණ ලැයිස්තුවම බෙදාගත හැක.</p>
+
+<h2 id="tab2">5. 🔍 දේශනා නම් සහ අන්තර්ගතය සෙවීම</h2>
+<img class="shot" src="guide-img/search.png" alt="සෙවීම">
+<div class="cap">සෙවුම — Singlish මගින් "baahiya suuthra" ලෙස ටයිප් කළ අයුරු</div>
+<p>මෙය යෙදුමේ බලවත්ම අංගයයි. වීඩියෝ 1,346ක <strong>මාතෘකා සහ විස්තර දෙකෙහිම</strong> ඕනෑම
+සිංහල වචනයක් සොයයි. සොයාගත් වචන කහ පැහැයෙන් highlight වේ.</p>
+<h3>Singlish මගින් සිංහල ටයිප් කිරීම</h3>
+<p>සිංහල යතුරු පුවරුවක් නොමැති වුව ද, ඉංග්‍රීසි අකුරින් ශබ්දානුකූලව ටයිප් කළ විට
+ස්වයංක්‍රීයව සිංහලට හැරේ (කොටුව යට "→" ලකුණින් පෙන්වයි):</p>
+<table>
+<tr><th>ටයිප් කරන්නේ</th><th>ලැබෙන්නේ</th></tr>
+<tr><td><code>anichcha</code></td><td>අනිච්ච</td></tr>
+<tr><td><code>suuthra</code></td><td>සූත්‍ර</td></tr>
+<tr><td><code>bhaavanaa</code></td><td>භාවනා</td></tr>
+<tr><td><code>saxgha</code> (x = ං)</td><td>සංඝ</td></tr>
+</table>
+<p>ප්‍රධාන නීති: <code>th</code>=ත, <code>t</code>=ට, <code>dh</code>=ද, <code>d</code>=ඩ,
+<code>L</code>=ළ, <code>N</code>=ණ, <code>Sh</code>=ෂ, <code>aa</code>=ා, <code>ii</code>=ී,
+<code>uu</code>=ූ, <code>oo</code>=ෝ, <code>x</code>=ං.
+ඉංග්‍රීසි වචනයක් සෙවීමට නම් <span class="btn-demo">සිං Singlish: ON</span> බොත්තම ඔබා OFF කරන්න.</p>
+<div class="tip">✔ වචනයක කොටසක් වුව ද සෑහේ — "අනිච්" සෙවූ විට අනිච්ච, අනිච්ඡ, අනිච්චානුපස්සනා
+යන සියල්ල හමු වේ. වචන කිහිපයක් ලිවූ විට (උදා: "අනිච්ච භාවනා") සියලු වචන ඇතුළත් වීඩියෝ පමණක් පෙන්වයි.</div>
+<h3>සිංහල යතුරු පුවරුව</h3>
+<img class="shot" src="guide-img/keyboard.png" alt="යතුරු පුවරුව">
+<div class="cap">⌨ යතුරු පුවරුව — සියලු සිංහල අක්ෂර, පිලි සහ ්‍ර / ්‍ය සංයෝග</div>
+<p><span class="btn-demo">⌨ යතුරු පුවරුව (keyboard)</span> බොත්තමෙන් තිරය මත සිංහල යතුරු පුවරුවක්
+විවෘත වේ — Singlish වලින් ලිවීමට අපහසු අකුරු (ඟ, ඬ, ඳ, ්‍ර, ්‍ය ආදිය) සඳහා ප්‍රයෝජනවත් ය.</p>
+
+<h2 id="tab3">6. 📜 සූත්‍ර නාමාවලිය</h2>
+<img class="shot" src="guide-img/suttas.png" alt="සූත්‍ර නාමාවලිය">
+<div class="cap">සූත්‍ර නාමාවලිය — "බාහිය" ලෙස පෙරූ අයුරු</div>
+<p>දේශනා විස්තර වලින් උපුටාගත් <strong>සූත්‍ර 317ක නාමාවලියකි</strong>. එක් එක් සූත්‍රය යටතේ:</p>
+<p>▸ සූත්‍ර පාඨය කියවීමට <strong>pitaka.lk / thripitakaya.org ලින්ක්</strong> ·
+▸ එම සූත්‍රය විග්‍රහ වන <strong>දේශනා (වීඩියෝ)</strong> ·
+▸ ඒවා අයත් ලැයිස්තු වෙත යා හැකි ටැග්</p>
+<p>ඉහළ සෙවුම් කොටුවෙන් සූත්‍ර නාමයෙන් පෙරා ගත හැක — Singlish ද ක්‍රියා කරයි
+(<code>baahiya</code> → බාහිය).</p>
+
+<h2 id="tab4">7. 📃 සියළු YouTube ධාවන ලැයිස්තු (Playlists)</h2>
+<img class="shot" src="guide-img/playlists.png" alt="සියලු ලැයිස්තු">
+<div class="cap">සියලු ලැයිස්තු 91 — "භාවනා" ලෙස පෙරූ අයුරු</div>
+<p>නාලිකාවේ <strong>සියලුම</strong> ධාවන ලැයිස්තු 91 මෙහි ඇත — මුල් පිටුවේ නොමැති
+සත්බුදු වන්දනාව, බුද්ධ පූජා, පුණ්‍යානුමෝදනා, ආර්ය කර්මස්ථාන භාවනා ආදිය ද ඇතුළුව.
+ක්‍රියාකාරිත්වය මුල් පිටුවට සමාන ය.</p>
+
+<h2 id="tab5">8. ⭐ මගේ ලැයිස්තුව</h2>
+<img class="shot" src="guide-img/mine.png" alt="මගේ ලැයිස්තුව">
+<div class="cap">මගේ ලැයිස්තුව — මෑත, ප්‍රියතම සහ අසා ඇති දේශනා</div>
+<p>ඔබේම පෞද්ගලික පිටුව — කොටස් තුනකි:</p>
+<p><strong>🕘 මෑතකදී බැලූ</strong> — අවසන් වරට බැලූ ලැයිස්තු/වීඩියෝ 12 ·
+<strong>⭐ මගේ ලැයිස්තුව</strong> — ⭐ බොත්තමෙන් එකතු කළ ප්‍රියතම දේශනා ·
+<strong>✓ අසා ඇති දේශනා</strong> — ලකුණු කළ දේශනා ලැයිස්තුව</p>
+<div class="note">⚠ මෙම දත්ත ගබඩා වන්නේ <strong>ඔබේ උපකරණයේ බ්‍රව්සරය තුළම ය</strong> —
+කිසිදු තැනකට යවන්නේ නැත. දුරකථනයේ සහ පරිගණකයේ ලැයිස්තු වෙන වෙනම පවතී.
+බ්‍රව්සරයේ site data මැකුවහොත් මේවා ද මැකේ.</div>
+
+<h2 id="dark">9. 🌙 අඳුරු තේමාව (dark mode)</h2>
+<img class="shot" src="guide-img/dark.png" alt="අඳුරු තේමාව">
+<div class="cap">අඳුරු තේමාව — රාත්‍රී පරිශීලනයට පහසුයි</div>
+<p>ඉහළ දකුණු කෙළවරේ 🌙 බොත්තම එබූ විට අඳුරු තේමාවට මාරු වේ; ☀️ මගින් නැවත ආලෝකවත් තේමාවට.
+ඔබේ තේරීම යෙදුම මතක තබා ගනී. පළමු වරට විවෘත කරන විට දුරකථනයේ system theme එක අනුගමනය කරයි.</p>
+
+<h2 id="faq">10. නිතර අසන පැන</h2>
+<h3>අන්තර්ජාලය නොමැතිව ක්‍රියා කරයි ද?</h3>
+<p>ඔව් — ස්ථාපනය කර පළමු වරට online විවෘත කළ පසු, ලැයිස්තු බැලීම, සෙවීම, විස්තර කියවීම
+සියල්ල offline ක්‍රියා කරයි. වීඩියෝ වාදනයට හා thumbnail පින්තූර වලට පමණක් අන්තර්ජාලය අවශ්‍ය ය.</p>
+<h3>මගේ තොරතුරු කිසිවක් රැස් කරනවා ද?</h3>
+<p>නැත. ලියාපදිංචියක්, පිවිසුමක් (login) හෝ දත්ත රැස්කිරීමක් නොමැත. ප්‍රියතම ලැයිස්තු ආදිය
+ඔබේ උපකරණයේම තැන්පත් වේ.</p>
+<h3>නාලිකාවට අලුත් දේශනා එකතු වූ විට?</h3>
+<p>යෙදුමේ දත්ත යාවත්කාලීන කළ විට, ස්ථාපිත යෙදුම් ඊළඟ online විවෘත කිරීමේදී
+ස්වයංක්‍රීයවම අලුත් දත්ත ලබා ගනී — ඔබ කිසිවක් කළ යුතු නැත.</p>
+<h3>Back බොත්තම ක්‍රියා කරයි ද?</h3>
+<p>ඔව් — දුරකථනයේ/බ්‍රව්සරයේ back බොත්තම යෙදුම තුළ පෙර පිටුවට ගෙන යයි.
+යෙදුම තුළ ඇති <span class="btn-demo">← ආපසු (back)</span> බොත්තම ද එසේම ය.</p>
+
+<div class="top"><a href="#top">↑ ඉහළට</a></div>
+</main>
+<footer>
+  නිස්සරණය කරා I Nissaranaya Kara —
+  <a href="https://nissaranayakara-a11y.github.io/nissaranayakara-webapp/" target="_blank" rel="noopener">දේශනා සෙවුම යෙදුම</a>
+</footer>
+</body>
+</html>
