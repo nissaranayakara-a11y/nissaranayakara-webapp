@@ -1,10 +1,17 @@
 /* Service worker: cache-first so the app works offline once visited. */
-const CACHE = 'nk-v2';
-const ASSETS = ['./', './index.html', './data.js', './sinhala-ime.js',
-                './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE = 'nk-v3';
+// critical assets — offline fails without these
+const CORE = ['./', './index.html', './data.js', './sinhala-ime.js', './manifest.webmanifest'];
+// nice-to-have — cached individually, failures ignored
+const EXTRA = ['./icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(
+    caches.open(CACHE).then(async (c) => {
+      await c.addAll(CORE);
+      await Promise.allSettled(EXTRA.map((u) => c.add(u)));
+    }).then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', (e) => {
