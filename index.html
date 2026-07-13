@@ -148,7 +148,17 @@
     background: var(--navy); color: #fff; padding: 8px 18px; border-radius: 20px;
     font-size: .9rem; display: none; z-index: 30; box-shadow: 0 2px 10px rgba(0,0,0,.3);
   }
-  @media (max-width: 520px) { .thumb { width: 96px; } }
+  /* mobile: no video thumbnails, full-width text, compact icon-only action buttons */
+  @media (max-width: 700px) {
+    .vrow .thumb { display: none; }
+    .vrow { gap: 0; }
+    .card { padding: 9px 12px; margin-bottom: 8px; }
+    .vt { font-size: .95rem; line-height: 1.35; }
+    .vurl { font-size: .75rem; margin: 2px 0 4px; }
+    .actions { gap: 8px; margin-top: 6px; }
+    .actions button { padding: 3px 12px; font-size: .95rem; }
+    .actions .albl { display: none; }
+  }
   /* --- mobile: bottom tab bar, slim one-line header --- */
   #bottomnav { display: none; }
   @media (max-width: 700px) {
@@ -368,10 +378,10 @@ function playFromRecent(vid) { window.open(vURL(vid), '_blank', 'noopener'); }
 // ---------- video actions (play / fav / watched / share) ----------
 function actionsBar(vid) {
   return `<div class="actions">
-    <button type="button" onclick="playVid('${vid}')">▶ මෙතන අහන්න (play)</button>
-    <button type="button" class="${favs.has(vid) ? 'on' : ''}" onclick="toggleFav('${vid}',this)">⭐ ${favs.has(vid) ? 'ලැයිස්තුවේ ඇත' : 'එකතු කරන්න'}</button>
-    <button type="button" class="${watched.has(vid) ? 'on' : ''}" onclick="toggleWatched('${vid}',this)">✓ ${watched.has(vid) ? 'අසා ඇත' : 'අසා ඇති ලෙස ලකුණු'}</button>
-    <button type="button" onclick="shareUrl('${vURL(vid)}')">🔗 share</button>
+    <button type="button" onclick="playVid('${vid}')">▶<span class="albl"> මෙතන අහන්න (play)</span></button>
+    <button type="button" class="${favs.has(vid) ? 'on' : ''}" onclick="toggleFav('${vid}',this)">⭐<span class="albl"> ${favs.has(vid) ? 'ලැයිස්තුවේ ඇත' : 'එකතු කරන්න'}</span></button>
+    <button type="button" class="${watched.has(vid) ? 'on' : ''}" onclick="toggleWatched('${vid}',this)">✓<span class="albl"> ${watched.has(vid) ? 'අසා ඇත' : 'අසා ඇති ලෙස ලකුණු'}</span></button>
+    <button type="button" onclick="shareUrl('${vURL(vid)}')">🔗<span class="albl"> share</span></button>
   </div>
   <div class="playerbox" id="player-${vid}"></div>`;
 }
@@ -387,13 +397,13 @@ function playVid(vid) {
   box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 function toggleFav(vid, btn) {
-  if (favs.has(vid)) { favs.delete(vid); btn.classList.remove('on'); btn.innerHTML = '⭐ එකතු කරන්න'; toast('ලැයිස්තුවෙන් ඉවත් කළා'); }
-  else { favs.add(vid); btn.classList.add('on'); btn.innerHTML = '⭐ ලැයිස්තුවේ ඇත'; toast('⭐ මගේ ලැයිස්තුවට එකතු කළා'); }
+  if (favs.has(vid)) { favs.delete(vid); btn.classList.remove('on'); btn.innerHTML = '⭐<span class="albl"> එකතු කරන්න</span>'; toast('ලැයිස්තුවෙන් ඉවත් කළා'); }
+  else { favs.add(vid); btn.classList.add('on'); btn.innerHTML = '⭐<span class="albl"> ලැයිස්තුවේ ඇත</span>'; toast('⭐ මගේ ලැයිස්තුවට එකතු කළා'); }
   saveFavs();
 }
 function toggleWatched(vid, btn) {
-  if (watched.has(vid)) { watched.delete(vid); btn.classList.remove('on'); btn.innerHTML = '✓ අසා ඇති ලෙස ලකුණු'; }
-  else { watched.add(vid); btn.classList.add('on'); btn.innerHTML = '✓ අසා ඇත'; }
+  if (watched.has(vid)) { watched.delete(vid); btn.classList.remove('on'); btn.innerHTML = '✓<span class="albl"> අසා ඇති ලෙස ලකුණු</span>'; }
+  else { watched.add(vid); btn.classList.add('on'); btn.innerHTML = '✓<span class="albl"> අසා ඇත</span>'; }
   saveWatched();
 }
 function shareUrl(url) {
