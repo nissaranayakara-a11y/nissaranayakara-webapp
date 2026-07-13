@@ -1,5 +1,5 @@
 /* Service worker: cache-first so the app works offline once visited. */
-const CACHE = 'nk-v5';
+const CACHE = 'nk-v6';
 // critical assets — offline fails without these
 const CORE = ['./', './index.html', './data.js', './sinhala-ime.js', './manifest.webmanifest'];
 // nice-to-have — cached individually, failures ignored
