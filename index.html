@@ -327,15 +327,35 @@ function snippet(desc, terms, span = 90) {
 }
 
 // ---------- recently viewed ----------
+// playlists are stored by their permanent YouTube playlist ID (safe across data updates)
+const PL_INDEX_BY_ID = {};
+D.playlists.forEach((p, i) => { PL_INDEX_BY_ID[p.id] = i; });
+// migrate old entries that stored playlist positions (numbers) instead of IDs
+recent = recent.map(r => {
+  if (r.t === 'p' && typeof r.id === 'number') {
+    const p = D.playlists[r.id];
+    return p ? { t: 'p', id: p.id } : null;
+  }
+  return r;
+}).filter(Boolean);
+saveRecent();
+
 function addRecent(t, id) {
   recent = [{ t, id }, ...recent.filter(r => !(r.t === t && String(r.id) === String(id)))].slice(0, 12);
   saveRecent();
 }
+function clearRecent() {
+  recent = [];
+  saveRecent();
+  toast('මෑත ලැයිස්තුව හිස් කළා');
+  render();
+}
 function recentChips(max) {
   const items = recent.slice(0, max || 12).map(r => {
     if (r.t === 'p') {
-      const p = D.playlists[r.id];
-      return p ? `<span class="rchip" onclick="go('playlist',${r.id},'deshana')">📃 ${esc(p.t)}</span>` : '';
+      const pi = PL_INDEX_BY_ID[r.id];
+      if (pi === undefined) return '';
+      return `<span class="rchip" onclick="go('playlist',${pi},'deshana')">📃 ${esc(D.playlists[pi].t)}</span>`;
     }
     const v = D.videos[r.id];
     return v ? `<span class="rchip" onclick="playFromRecent('${r.id}')">▶ ${esc(v.t.slice(0, 60))}</span>` : '';
@@ -449,7 +469,7 @@ function render() {
     const src = ['deshana', 'suttas', 'search', 'playlists', 'mine'].includes(from) ? from : 'playlists';
     setTab(src === 'mine' ? 'mine' : src);
     m.innerHTML = rPlaylist(+arg, src);
-    addRecent('p', +arg);
+    if (D.playlists[+arg]) addRecent('p', D.playlists[+arg].id);
     bindFilter('vfilter', 'v', (q) => rPlaylistVideos(+arg, q), 'pl-videos');
   }
   else if (view === 'playlists') { setTab('playlists'); m.innerHTML = rPlaylistIndex(); bindFilter('pfilter', 'p', rPlaylistCards, 'pl-grid'); }
@@ -487,7 +507,8 @@ function rPlaylistCards(qn, order, from) {
 
 function rDeshanaIndex() {
   const rc = recentChips(8);
-  return `${rc ? `<div class="recent-strip"><div class="rlabel">🕘 මෑතකදී බැලූ (recently viewed)</div>${rc}</div>` : ''}
+  return `${rc ? `<div class="recent-strip"><div class="rlabel">🕘 මෑතකදී බැලූ (recently viewed)
+      <button class="si-toggle" style="padding:1px 8px;font-size:.75rem" onclick="clearRecent()" title="clear">✕ clear</button></div>${rc}</div>` : ''}
     <input id="dfilter" class="searchbox" placeholder="ලැයිස්තු අතරින් සොයන්න… (filter playlists)">
     ${imeBar('d')}
     <div class="hint">${DESHANA_LIST.length} playlists — ලැයිස්තුවක් විවෘත කිරීමට ක්ලික් කරන්න</div>
@@ -615,7 +636,8 @@ function rMine() {
   const favRows = [...favs].reverse().map(vid => videoRow(vid, { tags: true, from: 'mine' })).join('');
   const watchedRows = [...watched].reverse().map(vid => videoRow(vid, { tags: true, from: 'mine' })).join('');
   return `
-    <div class="sechead">🕘 මෑතකදී බැලූ (recently viewed)</div>
+    <div class="sechead">🕘 මෑතකදී බැලූ (recently viewed)
+      ${rc ? '<button class="si-toggle" style="padding:1px 8px;font-size:.75rem" onclick="clearRecent()" title="clear">✕ clear</button>' : ''}</div>
     ${rc || '<div class="hint">තවම කිසිවක් නැත</div>'}
     <div class="sechead">⭐ මගේ ලැයිස්තුව (favourites) — ${favs.size}</div>
     ${favRows || '<div class="hint">වීඩියෝ එකතු කිරීමට ⭐ බොත්තම ඔබන්න</div>'}
