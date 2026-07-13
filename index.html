@@ -213,7 +213,7 @@
 </nav>
 <button class="topbtn" id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div id="toast"></div>
-<footer>Generated from the YouTube channel · <span id="fstats"></span></footer>
+<footer><span id="fstats"></span></footer>
 
 <script src="data.js"></script>
 <script src="sinhala-ime.js"></script>
@@ -264,7 +264,7 @@ const VP = {};
 D.playlists.forEach((p, pi) => p.v.forEach(vid => (VP[vid] = VP[vid] || []).push(pi)));
 for (const [vid, v] of Object.entries(D.videos)) VN[vid] = { t: norm(v.t), d: norm(v.d) };
 
-$('fstats').textContent = D.playlists.length + ' playlists · ' + Object.keys(D.videos).length + ' videos · ' + D.suttas.length + ' suttas';
+$('fstats').textContent = 'නිස්සරණය කරා YouTube නාලිකාවෙන් 📁 Playlists ' + D.playlists.length + ' | 🎥 වීඩියෝ ' + Object.keys(D.videos).length + ' | 📜 සූත්‍ර ' + D.suttas.length;
 
 // ---------- deshana tab ordering ----------
 const tnorm = (s) => s.normalize('NFC').replace(/[\s"“”‌‍~]+/g, '').toLowerCase();
