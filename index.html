@@ -14,105 +14,151 @@
 <style>
   :root {
     --navy: #1F3864; --blue: #2E5597; --light: #EEF2F8; --border: #D9E1EC;
-    --text: #222; --muted: #777; --hl: #ffe58a;
+    --text: #222; --muted: #777; --hl: #ffe58a; --bg: #fafbfd; --card: #fff;
+    --link: #0b5cad; --title: #1F3864; --h2: #2E5597;
+  }
+  html[data-theme="dark"] {
+    --navy: #16233f; --blue: #7da4e0; --light: #232a38; --border: #333c4d;
+    --text: #d8dce4; --muted: #8b94a5; --hl: #7a6410; --bg: #12151b; --card: #1a1f29;
+    --link: #79b0ea; --title: #a9c4ee; --h2: #8fb0e2;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; color: var(--text);
     font-family: "Nirmala UI", "Noto Sans Sinhala", "Iskoola Pota", sans-serif;
-    background: #fafbfd; line-height: 1.55;
+    background: var(--bg); line-height: 1.55;
   }
   header {
     background: var(--navy); color: #fff; padding: 14px 18px 0 18px;
     position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 6px rgba(0,0,0,.15);
   }
+  .hrow { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
   header h1 { margin: 0 0 4px 0; font-size: 1.25rem; font-weight: 600; }
   header h1 a { color: #fff; text-decoration: none; }
   header .sub { font-size: .8rem; opacity: .75; margin-bottom: 8px; }
+  .themebtn {
+    background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.3);
+    border-radius: 8px; padding: 4px 12px; cursor: pointer; font: inherit; font-size: .85rem;
+    flex-shrink: 0;
+  }
   nav { display: flex; gap: 4px; flex-wrap: wrap; }
   nav button {
     background: transparent; color: #cfd9ea; border: none; cursor: pointer;
     font: inherit; font-size: .95rem; padding: 9px 16px;
     border-radius: 8px 8px 0 0;
   }
-  nav button.active { background: #fafbfd; color: var(--navy); font-weight: 700; }
+  nav button.active { background: var(--bg); color: var(--title); font-weight: 700; }
   main { max-width: 980px; margin: 0 auto; padding: 18px; }
   .searchbox {
     width: 100%; padding: 11px 14px; font: inherit; font-size: 1.05rem;
     border: 2px solid var(--border); border-radius: 10px; outline: none;
+    background: var(--card); color: var(--text);
   }
   .searchbox:focus { border-color: var(--blue); }
   .hint { color: var(--muted); font-size: .85rem; margin: 6px 2px 14px; }
   .card {
-    background: #fff; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
     padding: 12px 16px; margin-bottom: 10px;
   }
   .plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
-  .plist .card { cursor: pointer; margin: 0; transition: box-shadow .15s, border-color .15s; }
+  .plist .card { cursor: pointer; margin: 0; transition: box-shadow .15s, border-color .15s; overflow: hidden; padding-top: 10px; }
   .plist .card:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(46,85,151,.15); }
-  .plist .card .t { font-weight: 700; color: var(--navy); }
+  .plist .card .t { font-weight: 700; color: var(--title); }
   .plist .card .c { color: var(--muted); font-size: .85rem; margin-top: 4px; }
-  a { color: #0b5cad; word-break: break-all; }
-  .vt { font-weight: 700; color: var(--navy); font-size: 1.02rem; }
-  .vt a { color: var(--navy); text-decoration: none; }
+  .pcover { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px; margin-bottom: 8px; background: var(--light); }
+  a { color: var(--link); word-break: break-all; }
+  .vrow { display: flex; gap: 12px; align-items: flex-start; }
+  .thumb { width: 128px; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px; flex-shrink: 0; background: var(--light); }
+  .vbody { flex: 1; min-width: 0; }
+  .vt { font-weight: 700; color: var(--title); font-size: 1.02rem; }
+  .vt a { color: var(--title); text-decoration: none; }
   .vt a:hover { text-decoration: underline; }
+  .vt.watched a { opacity: .6; }
   .vurl { font-size: .85rem; margin: 3px 0 6px; }
-  .desc { white-space: pre-wrap; font-size: .92rem; color: #333; border-top: 1px dashed var(--border); margin-top: 8px; padding-top: 8px; }
+  .desc { white-space: pre-wrap; font-size: .92rem; color: var(--text); border-top: 1px dashed var(--border); margin-top: 8px; padding-top: 8px; }
   details > summary { cursor: pointer; color: var(--blue); font-size: .88rem; user-select: none; margin-top: 6px; }
   .crumb { margin-bottom: 14px; }
-  .crumb button {
+  .crumb button, .abtn {
     background: var(--light); border: 1px solid var(--border); border-radius: 8px;
-    padding: 6px 14px; cursor: pointer; font: inherit; color: var(--navy);
+    padding: 6px 14px; cursor: pointer; font: inherit; color: var(--title);
   }
+  .actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .actions button {
+    background: var(--light); border: 1px solid var(--border); border-radius: 8px;
+    padding: 3px 10px; cursor: pointer; font: inherit; font-size: .85rem; color: var(--text);
+  }
+  .actions button.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .playerbox { margin-top: 10px; }
+  .playerbox iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 8px; }
   .ph { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .ph h2 { color: var(--navy); margin: 4px 0; font-size: 1.2rem; }
+  .ph h2 { color: var(--title); margin: 4px 0; font-size: 1.2rem; }
   .count { color: var(--muted); font-size: .9rem; }
-  mark { background: var(--hl); padding: 0 1px; }
+  mark { background: var(--hl); padding: 0 1px; color: inherit; }
   .tag {
     display: inline-block; background: var(--light); color: var(--blue);
     border-radius: 6px; padding: 1px 8px; font-size: .78rem; margin: 2px 4px 0 0;
     text-decoration: none; cursor: pointer;
   }
-  .sutta-name { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+  .sutta-name { font-weight: 700; color: var(--title); font-size: 1.05rem; }
   .sutta-links { font-size: .85rem; margin: 4px 0 8px; }
   .sv { font-size: .92rem; margin: 2px 0; }
   .empty { color: var(--muted); text-align: center; padding: 40px 0; }
   .topbtn {
     position: fixed; right: 18px; bottom: 18px; background: var(--navy); color: #fff;
     border: none; border-radius: 50%; width: 42px; height: 42px; cursor: pointer;
-    font-size: 1.1rem; display: none; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    font-size: 1.1rem; display: none; box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 20;
   }
   footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 20px; }
   .si-toolbar { display: flex; gap: 8px; align-items: center; margin: 8px 0 2px; flex-wrap: wrap; }
   .si-toggle {
     font: inherit; font-size: .85rem; padding: 5px 12px; cursor: pointer;
-    border: 1px solid var(--border); border-radius: 8px; background: #fff; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--muted);
   }
   .si-toggle.on { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .si-preview { font-size: 1rem; color: var(--navy); font-weight: 700; min-height: 1.3em; }
-  .si-kbd { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin: 8px 0; }
+  .si-preview { font-size: 1rem; color: var(--title); font-weight: 700; min-height: 1.3em; }
+  .si-kbd { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin: 8px 0; }
   .si-kbd-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; justify-content: center; }
   .si-key {
     font-family: inherit; font-size: 1.05rem; min-width: 40px; padding: 6px 4px; cursor: pointer;
     border: 1px solid var(--border); border-radius: 6px; background: var(--light); color: var(--text);
   }
-  .si-key:hover { background: #dce6f5; }
+  .si-key:hover { background: var(--border); }
   .si-help { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+  .recent-strip { margin-bottom: 14px; }
+  .recent-strip .rlabel { font-size: .85rem; color: var(--muted); margin-bottom: 4px; }
+  .rchip {
+    display: inline-block; background: var(--light); border: 1px solid var(--border);
+    color: var(--title); border-radius: 8px; padding: 3px 10px; margin: 2px 4px 2px 0;
+    font-size: .85rem; cursor: pointer; max-width: 100%; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom;
+  }
+  .sechead { color: var(--title); font-size: 1.1rem; font-weight: 700; margin: 18px 0 8px; }
+  #toast {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: 70px;
+    background: var(--navy); color: #fff; padding: 8px 18px; border-radius: 20px;
+    font-size: .9rem; display: none; z-index: 30; box-shadow: 0 2px 10px rgba(0,0,0,.3);
+  }
+  @media (max-width: 520px) { .thumb { width: 96px; } }
 </style>
 </head>
 <body>
 <header>
-  <h1><a href="#deshana">නිස්සරණය කරා I Nissaranaya Kara</a></h1>
+  <div class="hrow">
+    <h1><a href="#deshana">නිස්සරණය කරා I Nissaranaya Kara</a></h1>
+    <button class="themebtn" id="themebtn" type="button">🌙</button>
+  </div>
   <div class="sub">YouTube ධාවන ලැයිස්තු (playlists), වීඩියෝ සහ සුත්‍ර දේශනා නාමාවලිය</div>
   <nav>
     <button id="tab-deshana" onclick="go('deshana')">සදහම් දේශනා සහ පැන විසඳුම්</button>
     <button id="tab-search" onclick="go('search')">දේශනා නම් සහ අන්තර්ගතය සෙවීම</button>
     <button id="tab-suttas" onclick="go('suttas')">සූත්‍ර නාමාවලිය</button>
     <button id="tab-playlists" onclick="go('playlists')">සියළු YouTube ධාවන ලැයිස්තු (Playlists)</button>
+    <button id="tab-mine" onclick="go('mine')">⭐ මගේ ලැයිස්තුව</button>
   </nav>
 </header>
 <main id="main"></main>
 <button class="topbtn" id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="toast"></div>
 <footer>Generated from the YouTube channel · <span id="fstats"></span></footer>
 
 <script src="data.js"></script>
@@ -125,18 +171,48 @@ const esc = (s) => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;
 const vURL = (id) => 'https://www.youtube.com/watch?v=' + id;
 const pURL = (id) => 'https://www.youtube.com/playlist?list=' + id;
 
-// --- Sinhala-aware normalization: strip ZWJ/ZWNJ, NFC, lowercase ---
-const norm = (s) => s.normalize('NFC').replace(/[‌‍]/g, '').toLowerCase();
+// ---------- persistent state (localStorage) ----------
+const LS = {
+  get(k, dflt) { try { const v = localStorage.getItem('nk.' + k); return v === null ? dflt : JSON.parse(v); } catch (e) { return dflt; } },
+  set(k, v) { try { localStorage.setItem('nk.' + k, JSON.stringify(v)); } catch (e) {} },
+};
+let singlishOn = LS.get('singlish', true);
+const favs = new Set(LS.get('favs', []));
+const watched = new Set(LS.get('watched', []));
+let recent = LS.get('recent', []);   // [{t:'p'|'v', id}]
+const saveFavs = () => LS.set('favs', [...favs]);
+const saveWatched = () => LS.set('watched', [...watched]);
+const saveRecent = () => LS.set('recent', recent.slice(0, 12));
 
-// Precompute normalized text and playlist membership per video
-const VN = {};           // vid -> {t: normTitle, d: normDesc}
-const VP = {};           // vid -> [playlist indices]
+// ---------- dark mode ----------
+function applyTheme(dark) {
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  $('themebtn').textContent = dark ? '☀️' : '🌙';
+  LS.set('dark', dark);
+}
+$('themebtn').addEventListener('click', () =>
+  applyTheme(document.documentElement.dataset.theme !== 'dark'));
+applyTheme(LS.get('dark', window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches));
+
+// ---------- toast ----------
+let toastTimer;
+function toast(msg) {
+  const t = $('toast');
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.style.display = 'none'; }, 1800);
+}
+
+// ---------- normalization ----------
+const norm = (s) => s.normalize('NFC').replace(/[‌‍]/g, '').toLowerCase();
+const VN = {};
+const VP = {};
 D.playlists.forEach((p, pi) => p.v.forEach(vid => (VP[vid] = VP[vid] || []).push(pi)));
 for (const [vid, v] of Object.entries(D.videos)) VN[vid] = { t: norm(v.t), d: norm(v.d) };
 
 $('fstats').textContent = D.playlists.length + ' playlists · ' + Object.keys(D.videos).length + ' videos · ' + D.suttas.length + ' suttas';
 
-// --- "සදහම් දේශනා සහ පැන විසඳුම්" tab: pinned order + exclusions ---
+// ---------- deshana tab ordering ----------
 const tnorm = (s) => s.normalize('NFC').replace(/[\s"“”‌‍~]+/g, '').toLowerCase();
 const DESHANA_PINNED = ['චතුරාර්‍ය සත්‍යය දේශනා මාලාව','සුත්‍ර විග්‍රහය','දහම් කරුණු - කෙටියෙන්','පැන විසඳුම්',
   '"සියළු දෘෂ්ටි බිඳ සෝවාන් වීමට..." දේශනා මාලාව','"අස්සාදයේ ආදීනව දැකීම" දේශනා මාලාව',
@@ -154,12 +230,7 @@ const DESHANA_LIST = (() => {
   return [...pinned, ...rest];
 })();
 
-const descBlock = (vid) => {
-  const v = D.videos[vid];
-  return v.d ? `<details><summary>විස්තරය බලන්න (show description)</summary><div class="desc">${esc(v.d)}</div></details>` : '';
-};
-
-// --- highlighting: mark every occurrence of every term (works on original text via normalized mapping) ---
+// ---------- highlighting ----------
 function normMap(orig) {
   const nfc = orig.normalize('NFC');
   let normStr = '';
@@ -176,7 +247,6 @@ function highlight(orig, terms) {
   if (typeof terms === 'string') terms = terms ? [terms] : [];
   if (!terms.length) return esc(orig);
   const { nfc, normStr, map } = normMap(orig);
-  // collect all match ranges (original-string indices), then merge overlaps
   const ranges = [];
   for (const t of terms) {
     let idx = 0;
@@ -200,7 +270,6 @@ function highlight(orig, terms) {
   }
   return out + esc(nfc.slice(pos));
 }
-
 function snippet(desc, terms, span = 90) {
   if (typeof terms === 'string') terms = terms ? [terms] : [];
   const { nfc, normStr, map } = normMap(desc);
@@ -214,36 +283,138 @@ function snippet(desc, terms, span = 90) {
   return (s > 0 ? '…' : '') + nfc.slice(s, e).replace(/\n+/g, ' ') + (e < nfc.length ? '…' : '');
 }
 
-// --- routing ---
+// ---------- recently viewed ----------
+function addRecent(t, id) {
+  recent = [{ t, id }, ...recent.filter(r => !(r.t === t && String(r.id) === String(id)))].slice(0, 12);
+  saveRecent();
+}
+function recentChips(max) {
+  const items = recent.slice(0, max || 12).map(r => {
+    if (r.t === 'p') {
+      const p = D.playlists[r.id];
+      return p ? `<span class="rchip" onclick="go('playlist',${r.id},'deshana')">📃 ${esc(p.t)}</span>` : '';
+    }
+    const v = D.videos[r.id];
+    return v ? `<span class="rchip" onclick="playFromRecent('${r.id}')">▶ ${esc(v.t.slice(0, 60))}</span>` : '';
+  }).join('');
+  return items;
+}
+function playFromRecent(vid) { window.open(vURL(vid), '_blank', 'noopener'); }
+
+// ---------- video actions (play / fav / watched / share) ----------
+function actionsBar(vid) {
+  return `<div class="actions">
+    <button type="button" onclick="playVid('${vid}')">▶ මෙතන අහන්න (play)</button>
+    <button type="button" class="${favs.has(vid) ? 'on' : ''}" onclick="toggleFav('${vid}',this)">⭐ ${favs.has(vid) ? 'ලැයිස්තුවේ ඇත' : 'එකතු කරන්න'}</button>
+    <button type="button" class="${watched.has(vid) ? 'on' : ''}" onclick="toggleWatched('${vid}',this)">✓ ${watched.has(vid) ? 'අසා ඇත' : 'අසා ඇති ලෙස ලකුණු'}</button>
+    <button type="button" onclick="shareUrl('${vURL(vid)}')">🔗 share</button>
+  </div>
+  <div class="playerbox" id="player-${vid}"></div>`;
+}
+function playVid(vid) {
+  const box = $('player-' + vid);
+  if (!box) return;
+  if (box.innerHTML) { box.innerHTML = ''; return; }
+  // close other players
+  document.querySelectorAll('.playerbox').forEach(b => { if (b !== box) b.innerHTML = ''; });
+  box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+  addRecent('v', vid);
+  if (!watched.has(vid)) { watched.add(vid); saveWatched(); }
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function toggleFav(vid, btn) {
+  if (favs.has(vid)) { favs.delete(vid); btn.classList.remove('on'); btn.innerHTML = '⭐ එකතු කරන්න'; toast('ලැයිස්තුවෙන් ඉවත් කළා'); }
+  else { favs.add(vid); btn.classList.add('on'); btn.innerHTML = '⭐ ලැයිස්තුවේ ඇත'; toast('⭐ මගේ ලැයිස්තුවට එකතු කළා'); }
+  saveFavs();
+}
+function toggleWatched(vid, btn) {
+  if (watched.has(vid)) { watched.delete(vid); btn.classList.remove('on'); btn.innerHTML = '✓ අසා ඇති ලෙස ලකුණු'; }
+  else { watched.add(vid); btn.classList.add('on'); btn.innerHTML = '✓ අසා ඇත'; }
+  saveWatched();
+}
+function shareUrl(url) {
+  if (navigator.share) { navigator.share({ url }).catch(() => {}); return; }
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
+    () => toast('Link copied ✓'),
+    () => { prompt('Copy link:', url); }
+  );
+}
+
+// ---------- shared video row ----------
+const thumbImg = (vid) => `<img class="thumb" loading="lazy" alt=""
+  src="https://i.ytimg.com/vi/${vid}/mqdefault.jpg" onerror="this.style.display='none'">`;
+function videoRow(vid, opts = {}) {
+  const v = D.videos[vid];
+  if (!v) return '';
+  const terms = opts.terms || [];
+  const titleHtml = terms.length ? highlight(v.t, terms) : esc(v.t);
+  const num = opts.num !== undefined ? (opts.num + 1) + '. ' : '';
+  const tags = opts.tags ? (VP[vid] || []).map(pi =>
+    `<span class="tag" onclick="go('playlist',${pi},'${opts.from || 'playlists'}')">${esc(D.playlists[pi].t)}</span>`).join('') : '';
+  const descHtml = v.d ? `<details><summary>විස්තරය බලන්න (show description)</summary>
+      <div class="desc">${terms.length ? highlight(v.d, terms) : esc(v.d)}</div></details>` : '';
+  return `<div class="card"><div class="vrow">
+    ${thumbImg(vid)}
+    <div class="vbody">
+      <div class="vt ${watched.has(vid) ? 'watched' : ''}">${num}<a href="${vURL(vid)}" target="_blank" rel="noopener" onclick="addRecent('v','${vid}')">${titleHtml}</a></div>
+      <div class="vurl"><a href="${vURL(vid)}" target="_blank" rel="noopener">${vURL(vid)}</a></div>
+      ${opts.snippetHtml || ''}
+      ${descHtml}
+      ${tags ? `<div>${tags}</div>` : ''}
+      ${actionsBar(vid)}
+    </div>
+  </div></div>`;
+}
+
+// ---------- routing ----------
 function go(view, arg, from) {
   let h = view;
   if (arg !== undefined) h += '/' + arg;
   if (from) h += '/' + from;
-  location.hash = h;
+  if ('#' + h === location.hash) render(); else location.hash = h;
 }
 window.addEventListener('hashchange', render);
 
 function setTab(name) {
-  for (const t of ['playlists', 'deshana', 'suttas', 'search'])
+  for (const t of ['playlists', 'deshana', 'suttas', 'search', 'mine'])
     $('tab-' + t).classList.toggle('active', t === name);
+}
+
+// scroll memory (per hash, per session)
+let scrollTimer;
+window.addEventListener('scroll', () => {
+  $('topbtn').style.display = window.scrollY > 600 ? 'block' : 'none';
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => {
+    try { sessionStorage.setItem('nk.scroll.' + location.hash, String(window.scrollY)); } catch (e) {}
+  }, 150);
+});
+function restoreScroll() {
+  let y = 0;
+  try { y = Number(sessionStorage.getItem('nk.scroll.' + location.hash) || 0); } catch (e) {}
+  requestAnimationFrame(() => window.scrollTo(0, y));
 }
 
 function render() {
   const [view, arg, from] = location.hash.replace(/^#/, '').split('/');
   const m = $('main');
-  window.scrollTo(0, 0);
+  LS.set('lastTab', location.hash);
   if (view === 'playlist' && arg !== undefined) {
-    const src = ['deshana', 'suttas', 'search', 'playlists'].includes(from) ? from : 'playlists';
-    setTab(src);
+    const src = ['deshana', 'suttas', 'search', 'playlists', 'mine'].includes(from) ? from : 'playlists';
+    setTab(src === 'mine' ? 'mine' : src);
     m.innerHTML = rPlaylist(+arg, src);
+    addRecent('p', +arg);
+    bindFilter('vfilter', 'v', (q) => rPlaylistVideos(+arg, q), 'pl-videos');
   }
   else if (view === 'playlists') { setTab('playlists'); m.innerHTML = rPlaylistIndex(); bindFilter('pfilter', 'p', rPlaylistCards, 'pl-grid'); }
   else if (view === 'suttas') { setTab('suttas'); m.innerHTML = rSuttas(); bindFilter('sfilter', 's', rSuttasList, 'sutta-list'); }
   else if (view === 'search') { setTab('search'); m.innerHTML = rSearch(); bindSearch(); }
+  else if (view === 'mine') { setTab('mine'); m.innerHTML = rMine(); }
   else { setTab('deshana'); m.innerHTML = rDeshanaIndex(); bindFilter('dfilter', 'd', q => rPlaylistCards(q, DESHANA_LIST, 'deshana'), 'de-grid'); }
+  restoreScroll();
 }
 
-// --- views ---
+// ---------- views ----------
 function rPlaylistIndex() {
   return `<input id="pfilter" class="searchbox" placeholder="ලැයිස්තු අතරින් සොයන්න… (filter playlists)">
     ${imeBar('p')}
@@ -257,7 +428,9 @@ function rPlaylistCards(qn, order, from) {
   for (const i of idxs) {
     const p = D.playlists[i];
     if (qn && !norm(p.t).includes(qn)) continue;
+    const cover = p.v.length ? `<img class="pcover" loading="lazy" alt="" src="https://i.ytimg.com/vi/${p.v[0]}/mqdefault.jpg" onerror="this.style.display='none'">` : '';
     html += `<div class="card" onclick="go('playlist',${i},'${src}')">
+      ${cover}
       <div class="t">${qn ? highlight(p.t, qn) : esc(p.t)}</div>
       <div class="c">${p.n} videos</div></div>`;
   }
@@ -265,28 +438,39 @@ function rPlaylistCards(qn, order, from) {
 }
 
 function rDeshanaIndex() {
-  return `<input id="dfilter" class="searchbox" placeholder="ලැයිස්තු අතරින් සොයන්න… (filter playlists)">
+  const rc = recentChips(8);
+  return `${rc ? `<div class="recent-strip"><div class="rlabel">🕘 මෑතකදී බැලූ (recently viewed)</div>${rc}</div>` : ''}
+    <input id="dfilter" class="searchbox" placeholder="ලැයිස්තු අතරින් සොයන්න… (filter playlists)">
     ${imeBar('d')}
     <div class="hint">${DESHANA_LIST.length} playlists — ලැයිස්තුවක් විවෘත කිරීමට ක්ලික් කරන්න</div>
     <div class="plist" id="de-grid">${rPlaylistCards('', DESHANA_LIST, 'deshana')}</div>`;
 }
 
+function rPlaylistVideos(pi, qn) {
+  const p = D.playlists[pi];
+  let html = '';
+  p.v.forEach((vid, j) => {
+    if (qn) {
+      const n = VN[vid];
+      if (!n.t.includes(qn) && !n.d.includes(qn)) return;
+    }
+    html += videoRow(vid, { num: j, terms: qn ? [qn] : [] });
+  });
+  return html || '<div class="empty">ගැළපීම් නොමැත</div>';
+}
 function rPlaylist(pi, from) {
   const p = D.playlists[pi];
   if (!p) return '<div class="empty">Playlist not found</div>';
   const src = from || 'playlists';
-  let html = `<div class="crumb"><button onclick="go('${src}')">← ආපසු (back)</button></div>
+  return `<div class="crumb"><button onclick="go('${src}')">← ආපසු (back)</button></div>
     <div class="ph"><h2>${esc(p.t)}</h2>
-    <span class="count">${p.n} videos · <a href="${pURL(p.id)}" target="_blank" rel="noopener">Open playlist on YouTube ↗</a></span></div>`;
-  p.v.forEach((vid, j) => {
-    const v = D.videos[vid];
-    html += `<div class="card">
-      <div class="vt">${j + 1}. <a href="${vURL(vid)}" target="_blank" rel="noopener">${esc(v.t)}</a></div>
-      <div class="vurl"><a href="${vURL(vid)}" target="_blank" rel="noopener">${vURL(vid)}</a></div>
-      ${v.d ? `<details><summary>විස්තරය බලන්න (show description)</summary><div class="desc">${esc(v.d)}</div></details>` : ''}
-    </div>`;
-  });
-  return html;
+    <span class="count">${p.n} videos ·
+      <a href="${pURL(p.id)}" target="_blank" rel="noopener">Open on YouTube ↗</a> ·
+      <button class="abtn" style="font-size:.85rem;padding:2px 10px" onclick="shareUrl('${pURL(p.id)}')">🔗 share</button>
+    </span></div>
+    <input id="vfilter" class="searchbox" placeholder="මෙම ලැයිස්තුව තුළ සොයන්න… (search within this playlist)">
+    ${imeBar('v')}
+    <div id="pl-videos">${rPlaylistVideos(pi, '')}</div>`;
 }
 
 function rSuttas() {
@@ -303,7 +487,8 @@ function rSuttasList(qn) {
     const vids = s.v.map(vid => {
       const v = D.videos[vid];
       const pls = (VP[vid] || []).map(pi => `<span class="tag" onclick="go('playlist',${pi},'suttas')">${esc(D.playlists[pi].t)}</span>`).join('');
-      return `<div class="sv">▸ <a href="${vURL(vid)}" target="_blank" rel="noopener">${esc(v.t)}</a> ${pls}${descBlock(vid)}</div>`;
+      const descHtml = v.d ? `<details><summary>විස්තරය බලන්න (show description)</summary><div class="desc">${esc(v.d)}</div></details>` : '';
+      return `<div class="sv">▸ <a href="${vURL(vid)}" target="_blank" rel="noopener" onclick="addRecent('v','${vid}')">${esc(v.t)}</a> ${pls}${descHtml}</div>`;
     }).join('');
     html += `<div class="card">
       <div class="sutta-name">${qn ? highlight(s.n, qn) : esc(s.n)}</div>
@@ -313,7 +498,8 @@ function rSuttasList(qn) {
 }
 
 function rSearch() {
-  return `<input id="q" class="searchbox" placeholder="සිංහල වචනයක් හෝ වාක්‍ය ඛණ්ඩයක් සොයන්න…" autofocus>
+  const last = LS.get('lastQ', '');
+  return `<input id="q" class="searchbox" placeholder="සිංහල වචනයක් හෝ වාක්‍ය ඛණ්ඩයක් සොයන්න…" value="${esc(last)}" autofocus>
     <div class="si-toolbar">
       <button id="si-toggle" class="si-toggle" type="button">සිං Singlish: ON</button>
       <button id="si-kbd-toggle" class="si-toggle" type="button">⌨ යතුරු පුවරුව (keyboard)</button>
@@ -324,33 +510,31 @@ function rSearch() {
     <div class="hint">මාතෘකා සහ විස්තර දෙකෙහිම සොයයි · partial words match (උදා: "අනිච්" ⇒ අනිච්ච, අනිච්ඡ, අනිච්චානුපස්සනා...,  "සූත්‍ර" ⇒ සූත්‍රය, සූත්‍රයේ…)</div>
     <div id="results"></div>`;
 }
-let singlishOn = true;
 function bindSearch() {
   const q = $('q');
   let timer;
   const trigger = () => { clearTimeout(timer); timer = setTimeout(doSearch, 200); };
   q.addEventListener('input', trigger);
   const tgl = $('si-toggle');
-  tgl.textContent = 'සිං Singlish: ' + (singlishOn ? 'ON' : 'OFF');
-  tgl.classList.toggle('on', singlishOn);
-  tgl.addEventListener('click', () => {
-    singlishOn = !singlishOn;
+  const setLabel = () => {
     tgl.textContent = 'සිං Singlish: ' + (singlishOn ? 'ON' : 'OFF');
     tgl.classList.toggle('on', singlishOn);
-    q.focus(); doSearch();
-  });
+  };
+  setLabel();
+  tgl.addEventListener('click', () => { singlishOn = !singlishOn; LS.set('singlish', singlishOn); setLabel(); q.focus(); doSearch(); });
   const kbox = $('si-kbd-box');
   window.SinhalaIME.buildKeyboard(kbox, q, trigger);
   $('si-kbd-toggle').addEventListener('click', () => {
     kbox.style.display = kbox.style.display === 'none' ? 'block' : 'none';
   });
   q.focus();
+  if (q.value.trim()) doSearch();
 }
 function doSearch() {
   const raw = $('q').value.trim();
+  LS.set('lastQ', raw);
   const conv = singlishOn ? window.SinhalaIME.translit(raw) : raw;
   $('si-preview').textContent = (conv && conv !== raw) ? '→ ' + conv : '';
-  // multi-word search: every word must appear (in title or description)
   const terms = norm(conv).split(/\s+/).filter(t => t.length >= 2);
   const R = $('results');
   if (!terms.length) { R.innerHTML = '<div class="empty">අවම වශයෙන් අකුරු 2ක් ටයිප් කරන්න</div>'; return; }
@@ -358,8 +542,7 @@ function doSearch() {
   for (const [vid, n] of Object.entries(VN)) {
     let tCount = 0, ok = true;
     for (const t of terms) {
-      const inT = n.t.includes(t);
-      if (inT) tCount++;
+      if (n.t.includes(t)) tCount++;
       else if (!n.d.includes(t)) { ok = false; break; }
     }
     if (ok) hits.push({ vid, tCount });
@@ -369,19 +552,30 @@ function doSearch() {
   for (const h of hits.slice(0, 300)) {
     const v = D.videos[h.vid];
     const sn = h.tCount < terms.length ? snippet(v.d, terms) : null;
-    const pls = (VP[h.vid] || []).map(pi => `<span class="tag" onclick="go('playlist',${pi},'search')">${esc(D.playlists[pi].t)}</span>`).join('');
-    html += `<div class="card">
-      <div class="vt"><a href="${vURL(h.vid)}" target="_blank" rel="noopener">${highlight(v.t, terms)}</a></div>
-      <div class="vurl"><a href="${vURL(h.vid)}" target="_blank" rel="noopener">${vURL(h.vid)}</a></div>
-      ${sn ? `<div class="desc">${highlight(sn, terms)}</div>` : ''}
-      ${v.d ? `<details><summary>විස්තරය බලන්න (show description)</summary><div class="desc">${highlight(v.d, terms)}</div></details>` : ''}
-      <div>${pls}</div></div>`;
+    html += videoRow(h.vid, {
+      terms, tags: true, from: 'search',
+      snippetHtml: sn ? `<div class="desc">${highlight(sn, terms)}</div>` : '',
+    });
   }
   if (!hits.length) html = '<div class="empty">ගැළපීම් නොමැත — වෙනත් වචනයක් උත්සාහ කරන්න</div>';
   R.innerHTML = html;
 }
 
-// Shared IME toolbar (Singlish toggle + on-screen keyboard) for filter boxes
+// ---------- මගේ ලැයිස්තුව ----------
+function rMine() {
+  const rc = recentChips(12);
+  const favRows = [...favs].reverse().map(vid => videoRow(vid, { tags: true, from: 'mine' })).join('');
+  const watchedRows = [...watched].reverse().map(vid => videoRow(vid, { tags: true, from: 'mine' })).join('');
+  return `
+    <div class="sechead">🕘 මෑතකදී බැලූ (recently viewed)</div>
+    ${rc || '<div class="hint">තවම කිසිවක් නැත</div>'}
+    <div class="sechead">⭐ මගේ ලැයිස්තුව (favourites) — ${favs.size}</div>
+    ${favRows || '<div class="hint">වීඩියෝ එකතු කිරීමට ⭐ බොත්තම ඔබන්න</div>'}
+    <div class="sechead">✓ අසා ඇති දේශනා (watched) — ${watched.size}</div>
+    <details ${watched.size && watched.size <= 10 ? 'open' : ''}><summary>බලන්න (show list)</summary>${watchedRows || '<div class="hint">තවම කිසිවක් නැත</div>'}</details>`;
+}
+
+// ---------- shared IME toolbar ----------
 function imeBar(prefix) {
   return `<div class="si-toolbar">
       <button id="${prefix}-si-toggle" class="si-toggle" type="button">සිං Singlish: ON</button>
@@ -398,7 +592,7 @@ function setupIME(inputId, prefix, onChange) {
     tgl.classList.toggle('on', singlishOn);
   };
   setLabel();
-  tgl.addEventListener('click', () => { singlishOn = !singlishOn; setLabel(); q.focus(); onChange(); });
+  tgl.addEventListener('click', () => { singlishOn = !singlishOn; LS.set('singlish', singlishOn); setLabel(); q.focus(); onChange(); });
   const kbox = $(prefix + '-si-kbd-box');
   window.SinhalaIME.buildKeyboard(kbox, q, onChange);
   $(prefix + '-si-kbd-toggle').addEventListener('click', () => {
@@ -411,9 +605,9 @@ function setupIME(inputId, prefix, onChange) {
     return conv;
   };
 }
-
 function bindFilter(inputId, prefix, renderFn, targetId) {
   const el = $(inputId);
+  if (!el) return;
   let timer, getConv;
   const apply = () => { $(targetId).innerHTML = renderFn(norm(getConv())); };
   const trigger = () => { clearTimeout(timer); timer = setTimeout(apply, 150); };
@@ -421,10 +615,11 @@ function bindFilter(inputId, prefix, renderFn, targetId) {
   el.addEventListener('input', trigger);
 }
 
-window.addEventListener('scroll', () => {
-  $('topbtn').style.display = window.scrollY > 600 ? 'block' : 'none';
-});
-
+// ---------- start ----------
+if (!location.hash) {
+  const last = LS.get('lastTab', '');
+  if (last && last !== '#') { location.hash = last; }
+}
 render();
 
 // Register service worker (only when served over http/https — skipped for local file:// use)
