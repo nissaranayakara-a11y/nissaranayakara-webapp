@@ -133,8 +133,9 @@
   }
   .si-key:hover { background: var(--border); }
   .si-help { font-size: .78rem; color: var(--muted); margin-top: 4px; }
-  .recent-strip { margin-bottom: 14px; }
-  .recent-strip .rlabel { font-size: .85rem; color: var(--muted); margin-bottom: 4px; }
+  .recent-strip { margin-bottom: 12px; }
+  .recent-strip .rlabel { font-size: .85rem; color: var(--muted); cursor: pointer; user-select: none; margin: 0; }
+  .recent-strip summary.rlabel { list-style-position: inside; }
   .rchip {
     display: inline-block; background: var(--light); border: 1px solid var(--border);
     color: var(--title); border-radius: 8px; padding: 3px 10px; margin: 2px 4px 2px 0;
@@ -507,8 +508,12 @@ function rPlaylistCards(qn, order, from) {
 
 function rDeshanaIndex() {
   const rc = recentChips(8);
-  return `${rc ? `<div class="recent-strip"><div class="rlabel">🕘 මෑතකදී බැලූ (recently viewed)
-      <button class="si-toggle" style="padding:1px 8px;font-size:.75rem" onclick="clearRecent()" title="clear">✕ clear</button></div>${rc}</div>` : ''}
+  return `${rc ? `<details class="recent-strip" ${LS.get('recentOpen', false) ? 'open' : ''} ontoggle="LS.set('recentOpen', this.open)">
+      <summary class="rlabel">🕘 මෑතකදී බැලූ (recently viewed) — ${recent.length}
+        <button class="si-toggle" style="padding:1px 8px;font-size:.75rem" onclick="event.preventDefault();event.stopPropagation();clearRecent()" title="clear">✕ clear</button>
+      </summary>
+      <div style="margin-top:6px">${rc}</div>
+    </details>` : ''}
     <input id="dfilter" class="searchbox" placeholder="ලැයිස්තු අතරින් සොයන්න… (filter playlists)">
     ${imeBar('d')}
     <div class="hint">${DESHANA_LIST.length} playlists — ලැයිස්තුවක් විවෘත කිරීමට ක්ලික් කරන්න</div>
